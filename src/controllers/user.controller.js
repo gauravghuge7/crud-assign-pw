@@ -46,16 +46,26 @@ const registerUser = async (req, res) => {
 }
 
 
+
 const deleteUser = async (req, res) => {
 
     try {
-        
+        const user = req.params.id
+
+        const delUser = await User.findByIdAndDelete(user);
+
+        res.status(200).json({
+            success: true,
+            message: 'the user deleted successfully',
+            delUser
+        })
         
     } catch (error) {
-        
+        console.log(' error while deleting the user ',error);
     }
 }
 
 export {
-    registerUser
+    registerUser,
+    deleteUser
 }
